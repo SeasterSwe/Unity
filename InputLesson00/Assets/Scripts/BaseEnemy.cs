@@ -61,6 +61,7 @@ public class BaseEnemy : MonoBehaviour
     void takeDmg(float amount = 1)
     {
         currentHealth -= 1;
+        GetComponent<AudioSource>().Play();
         if (currentHealth <= 0)
         {
             GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>().AddScore(10 * startHealth);

@@ -43,6 +43,7 @@ public class StoneBase : MonoBehaviour
 
     void TakeDmg()
     {
+        GetComponent<AudioSource>().Play();
         currentHealth -= 1;
         if (currentHealth <= 0)
             DestroyStone();

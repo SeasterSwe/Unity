@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4759653833904873505}
   - component: {fileID: 4759653833904873506}
   - component: {fileID: 4759653833904873507}
-  - component: {fileID: 4759653833904873508}
   - component: {fileID: 8623441200625197861}
   - component: {fileID: 5465463462479989389}
+  - component: {fileID: 8196885976660885204}
   m_Layer: 8
   m_Name: SmallRock
   m_TagString: Asteroid
@@ -102,20 +102,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.43
---- !u!114 &4759653833904873508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4759653833904873509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4689f9bd5f85f9743a698b1c6709bf2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 0
-  speed: 0
 --- !u!50 &8623441200625197861
 Rigidbody2D:
   serializedVersion: 4
@@ -244,3 +230,17 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &8196885976660885204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4759653833904873509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f20d2928d64d6e45b6de4adbb753c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 1
+  speed: 10
