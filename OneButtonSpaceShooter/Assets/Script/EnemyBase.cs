@@ -42,12 +42,13 @@ public class EnemyBase : MonoBehaviour
 
     }
 
-    protected virtual void Death(bool instanceParticle = true)
+    protected virtual void Death(bool instanceParticle = true, bool givesScore = true)
     {
         if(instanceParticle)
             Instantiate(deathEffekt, transform.position, deathEffekt.transform.rotation);
+        if(givesScore)
+            GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreGiven);
 
-        GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreGiven);
         Destroy(gameObject);
     }
 
@@ -61,7 +62,7 @@ public class EnemyBase : MonoBehaviour
         }
         else if (tag == "Enemy")
             return;
-        Death(false);
+        Death(false, false);
     }
 
     IEnumerator Blink(float duration = 0.1f)

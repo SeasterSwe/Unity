@@ -27,6 +27,7 @@ public class PlayerMove : MonoBehaviour
         brainDeadSpeedBug = speed;
         audioSource = GetComponent<AudioSource>();
         bullet.GetComponent<PlayerBullet>().hitEffekt = hitEffekt;
+        speedTemp = speed;
     }
 
     // Update is called once per frame
@@ -49,22 +50,38 @@ public class PlayerMove : MonoBehaviour
 
     void Fire()
     {
-        PlaySound(shootSound, true);
-        Instantiate(muzzleFlash, cannonPoint.transform.position, muzzleFlash.transform.rotation);
+        PlayPlayerSound(shootSound, true);
         MutliShoot(amountOfBullets);
+        //StartCoroutine(FireBurst(bullet, 3, 0.1f));
     }
 
-    void Burst(int n)
+    public IEnumerator FireBurst(GameObject bulletPrefab, int burstSize, float rateOfFire)
     {
-
+        float bulletDelay = rateOfFire;
+        StartCoroutine(MinHjärnaDog(burstSize, rateOfFire));
+        Vector3 cannon = cannonPoint.transform.position;
+        for (int i = 0; i < burstSize; i++)
+        {
+            Instantiate(muzzleFlash, cannon, muzzleFlash.transform.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, cannon, transform.rotation); 
+            yield return new WaitForSeconds(bulletDelay); 
+        }
     }
 
-    IEnumerable SpawnBullet(float nextSpawn)
+    public float speedTemp;
+    IEnumerator MinHjärnaDog(float burstSize, float rateOfFire)
     {
-        yield return new WaitForSeconds(nextSpawn);
+        float time = (burstSize-1) * rateOfFire;
+        speed = 0;
+        smoothVal = 0.01f;
+        yield return new WaitForSeconds(time);
+        speed = speedTemp *=-1;
+        smoothVal = 0.08f;
     }
+
     void MutliShoot(int n)
     {
+        Instantiate(muzzleFlash, cannonPoint.transform.position, muzzleFlash.transform.rotation);
         float angleToDivide = n * angleBetweenBullets;
         float spreadAngle = angleToDivide / n;
         for (int i = 0; i < n; i++)
@@ -75,12 +92,13 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void PlaySound(AudioClip clip, bool pitchSound = true)
+    public void PlayPlayerSound(AudioClip clip, bool pitchSound = true, float volume = 0.13f)
     {
         audioSource.clip = clip;
         if(pitchSound)
             PitchSound.pitchSound(gameObject, 0.8f, 1.6f);
-        
+
+        audioSource.volume = volume;
         audioSource.Play();
     }
 }
