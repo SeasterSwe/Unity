@@ -25,7 +25,7 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Movement()
     {
-        transform.Translate(transform.right * -speed * Time.deltaTime);
+        transform.Translate(transform.up * -speed * Time.deltaTime);
     }
     protected virtual void TakeDmg()
     {

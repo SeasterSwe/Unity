@@ -33,7 +33,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             speed *= -1;
             Fire();
@@ -42,10 +42,10 @@ public class PlayerMove : MonoBehaviour
         currentSpeed = Mathf.SmoothDamp(currentSpeed, speed, ref speedSmoothVelocity, smoothVal);
         transform.Translate(transform.right * currentSpeed * Time.deltaTime, Space.World);
 
-        if (transform.position.y > 6.5f)
-            speed = brainDeadSpeedBug;
-        else if(transform.position.y < -6.5f)
+        if (transform.position.x > 2.8f)
             speed = -brainDeadSpeedBug;
+        else if(transform.position.x < -2.8f)
+            speed = brainDeadSpeedBug;
     }
 
     void Fire()

@@ -25,7 +25,8 @@ public class PlayerBullet : MonoBehaviour
 
     bool YeetedOfScreen()
     {
-        if (transform.position.x > 16)
+        if (transform.position.y > 12
+            )
             return true;
         else
             return false;

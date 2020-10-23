@@ -26,8 +26,8 @@ public class EnemySpawner : MonoBehaviour
     {
         int size = enemySorts.Length;
         var typeOfEnemy = Random.Range(0, size);
-        float yVal = Random.Range(-6f, 6f);
-        GameObject enemy = Instantiate(enemySorts[typeOfEnemy], new Vector2(gameObject.transform.position.x, yVal),
+        float yVal = Random.Range(-2.7f, 2.7f);
+        GameObject enemy = Instantiate(enemySorts[typeOfEnemy], new Vector2(yVal, gameObject.transform.position.y),
             enemySorts[typeOfEnemy].transform.rotation);
     }
 }
