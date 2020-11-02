@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4088743854359314623}
   - component: {fileID: 4088743854359314620}
   - component: {fileID: 4088743854359314621}
-  - component: {fileID: 4739918684068827016}
+  - component: {fileID: 976878019253584883}
   m_Layer: 0
-  m_Name: LandEffekt
+  m_Name: ZombieHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1362,8 +1362,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.764151, g: 0.69965154, b: 0.42172483, a: 1}
-        key1: {r: 0.050329305, g: 0.3679245, b: 0.13228935, a: 0}
+        key0: {r: 0.8980392, g: 0.2133963, b: 0.19999997, a: 1}
+        key1: {r: 0.5566038, g: 0, b: 0.19460557, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 1}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1371,14 +1371,14 @@ ParticleSystem:
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 65535
-        ctime2: 0
+        ctime1: 52814
+        ctime2: 65535
         ctime3: 0
         ctime4: 0
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 28527
+        atime0: 29491
         atime1: 65535
         atime2: 65535
         atime3: 0
@@ -1387,7 +1387,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 2
+        m_NumColorKeys: 3
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
@@ -4871,7 +4871,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &4739918684068827016
+--- !u!114 &976878019253584883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

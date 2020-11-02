@@ -1,36 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class PlayerMove : MonoBehaviour
 {
+    public float slideSpeed = 7;
     public float speed = 5;
     public float jumpPower = 10;
+    private float activeSpeed;
 
     Rigidbody2D rb2d;
     [HideInInspector]
     public Vector2 movement = new Vector2();
-    bool grounded = false;
-    bool jump = false;
+    public bool grounded = false;
+    public bool jump = false;
     private PlayerSoundManager soundManager;
     public GameObject landEffekt;
     public AudioClip landSound;
     public AudioClip jumpSound;
+    [HideInInspector] public bool sliding;
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         soundManager = GetComponent<PlayerSoundManager>();
+        activeSpeed = speed;
     }
 
     void Update()
     {
         float x = Input.GetAxis("Horizontal");
 
-        movement = new Vector2(x * speed, rb2d.velocity.y);
+        movement = new Vector2(x * activeSpeed, rb2d.velocity.y);
 
         if (Input.GetButtonDown("Jump") && grounded)
         {
             jump = true;
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && grounded)
+        {
+            sliding = true;
+            activeSpeed = slideSpeed;
+        }
+        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            sliding = false;
+            activeSpeed = speed;
         }
     }
 

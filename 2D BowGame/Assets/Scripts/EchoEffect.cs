@@ -12,7 +12,8 @@ public class EchoEffect : MonoBehaviour
     private PlayerMove playerMove;
     private void Start()
     {
-        playerMove = GetComponent<PlayerMove>();
+        if (IsAPlayerEffect)
+            playerMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>();
     }
     void Update()
     {

@@ -6,15 +6,14 @@ public class CameraSmooth : MonoBehaviour
 {
 	public float smoothingTime = 0.8f;
 
-	private Transform target;
-
-	// Use this for initialization
-	void Start()
-	{
-		target = GameObject.FindGameObjectWithTag("Player").transform;
-	}
+	public Transform target;
 
 	// Update is called once per frame
+	void Start()
+    {
+		if (target == null)
+			target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 	void Update()
 	{
 		//Calculate the vector between where we are and where we want to be

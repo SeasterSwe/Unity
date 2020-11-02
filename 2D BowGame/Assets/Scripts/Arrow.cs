@@ -24,6 +24,7 @@ public class Arrow : MonoBehaviour
     {
         hasHit = true;
         rb.velocity = Vector2.zero;
-        rb.isKinematic = true; //Fryser
+        rb.isKinematic = true;
+        Destroy(GetComponent<Collider2D>());
     }
 }
