@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 5472249955443324987}
   - component: {fileID: 5472249955443324982}
   - component: {fileID: 6763475902481431821}
-  - component: {fileID: 8750990010657600221}
+  - component: {fileID: -5731830232072837969}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -514,7 +514,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!82 &8750990010657600221
+--- !u!82 &-5731830232072837969
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -524,9 +524,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d928a1e8079d565468f41863f573d42d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c91c3d7a69527b548814183aeb09d734, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.22
   m_Pitch: 1
   Loop: 0
   Mute: 0

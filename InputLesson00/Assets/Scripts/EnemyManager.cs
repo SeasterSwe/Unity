@@ -17,10 +17,13 @@ public class EnemyManager : MonoBehaviour
     {
         if(Time.time > timeToNextEnemy)
         {
-            timeToNextEnemy = Time.time + spawnRate + Random.Range(-0.8f, 2f);
             float x = Random.Range(-1f, 1f);
             float y = Random.Range(-1, 1f);
             Vector3 v3Pos = Camera.main.ViewportToWorldPoint(v3Boundry());
+            if (Mathf.Abs(v3Pos.x) > 64 || Mathf.Abs(v3Pos.y) > 37)
+                return;
+
+            timeToNextEnemy = Time.time + spawnRate + Random.Range(-0.8f, 2f);
             GameObject EnemyClone = Instantiate(enemy, v3Pos, enemy.transform.rotation);
         }
     }

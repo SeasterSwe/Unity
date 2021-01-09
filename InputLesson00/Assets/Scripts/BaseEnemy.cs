@@ -16,8 +16,10 @@ public class BaseEnemy : MonoBehaviour
     private Transform playerTransform;
 
     public GameObject explotion;
+    AudioSource audioSource;
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         currentHealth = startHealth;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         float alphaVal = Random.Range(0.5f, 1f);
@@ -54,25 +56,27 @@ public class BaseEnemy : MonoBehaviour
         if (obj.tag == "Player")
             return;
 
-        if(obj.tag == "Bullet")
+        if (obj.tag == "Bullet")
             takeDmg();
     }
 
-    void takeDmg(float amount = 1)
+    public void takeDmg(float amount = 1)
     {
-        currentHealth -= 1;
-        GetComponent<AudioSource>().Play();
+        currentHealth -= amount;
         if (currentHealth <= 0)
         {
             GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>().AddScore(10 * startHealth);
             DestroyEnemy();
             return;
-        }    
+        }
         else
         {
+
             float lerpVal = 1 - (currentHealth / startHealth);
             currentColor = Color.Lerp(color1, color2, lerpVal);
             GetComponent<SpriteRenderer>().color = currentColor;
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.Play();
         }
         StartCoroutine(Blink(Color.white, 0.15f));
     }

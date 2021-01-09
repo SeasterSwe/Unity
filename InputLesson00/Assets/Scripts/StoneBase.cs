@@ -10,6 +10,7 @@ public class StoneBase : MonoBehaviour
     private Color ogColor;
     public GameObject smalRock;
     public GameObject explotionSound;
+    bool canTakeDmg = true;
     private void Start()
     {
         currentHealth = startHealth;
@@ -43,7 +44,10 @@ public class StoneBase : MonoBehaviour
 
     void TakeDmg()
     {
-        GetComponent<AudioSource>().Play();
+        if (!canTakeDmg)
+            return;
+
+        canTakeDmg = false;
         currentHealth -= 1;
         if (currentHealth <= 0)
             DestroyStone();
@@ -55,6 +59,7 @@ public class StoneBase : MonoBehaviour
         Split();
         GameObject explotion = Instantiate(explotionSound, transform.position, explotionSound.transform.rotation);
         Destroy(explotion, 1f);
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<StoneSpawner>().RemoveStone();
         Destroy(gameObject);
     }
     void Split()
@@ -84,5 +89,6 @@ public class StoneBase : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         GetComponent<SpriteRenderer>().color = ogColor;
+        canTakeDmg = true;
     }
 }
