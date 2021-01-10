@@ -9,7 +9,7 @@ public class PlayerBullet : MonoBehaviour
     public GameObject explotion;
     int dmg = 1;
     float speed = 15;
-    float timeAlive = 2;
+    float timeAlive = 1.3f;
     Rigidbody2D rb;
     private void Start()
     {
