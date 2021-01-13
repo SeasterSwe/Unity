@@ -12,11 +12,13 @@ public class ScoreList : MonoBehaviour
     public GameObject parentObj;
     public TextMeshProUGUI scoreText;
     public Color[] textColors;
-
+    public GameObject canvas;
     public float tweenDelay = 1f;
 
     void Start()
     {
+        if(canvas == null)
+            canvas = GameObject.Find("Canvas");
 
         if (!PlayerPrefs.HasKey("Score0"))
         {
@@ -55,7 +57,7 @@ public class ScoreList : MonoBehaviour
 
     IEnumerator DisplayScores()
     {
-        float xValOutOfScreen = -GameObject.Find("Canvas").GetComponent<RectTransform>().position.x;
+        float xValOutOfScreen = -canvas.GetComponent<RectTransform>().position.x;
         xValOutOfScreen -= 345;//width på text
         Vector3 spawnPos = new Vector3(xValOutOfScreen, parentObj.transform.position.y, parentObj.transform.position.z);
         for (int i = 0; i < amountOfSavedScores; i++)
