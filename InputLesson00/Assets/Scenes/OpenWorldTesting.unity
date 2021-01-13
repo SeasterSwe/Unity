@@ -2005,6 +2005,11 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.atime0
       value: 57632
       objectReference: {fileID: 0}
+    - target: {fileID: 1941262933147204346, guid: df0e00d7fd3399e4a9153364de089929,
+        type: 3}
+      propertyPath: UVModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1941262933147204347, guid: df0e00d7fd3399e4a9153364de089929,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -2012,8 +2017,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1941262933147204347, guid: df0e00d7fd3399e4a9153364de089929,
         type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941262933147204347, guid: df0e00d7fd3399e4a9153364de089929,
+        type: 3}
       propertyPath: m_SortingOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941262933147204347, guid: df0e00d7fd3399e4a9153364de089929,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 78f10a884e30ef8439b9520ee890f16b, type: 2}
+    - target: {fileID: 1941262933147204347, guid: df0e00d7fd3399e4a9153364de089929,
+        type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941262933147204347, guid: df0e00d7fd3399e4a9153364de089929,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941262933147204347, guid: df0e00d7fd3399e4a9153364de089929,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1941262933147204348, guid: df0e00d7fd3399e4a9153364de089929,
         type: 3}
