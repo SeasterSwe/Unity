@@ -590,6 +590,7 @@ GameObject:
   - component: {fileID: 619923812}
   - component: {fileID: 619923811}
   - component: {fileID: 619923813}
+  - component: {fileID: 619923814}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -642,6 +643,19 @@ MonoBehaviour:
   stones:
   - {fileID: 638400465}
   - {fileID: 1184440258}
+--- !u!114 &619923814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619923810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd45122cf525ce045ae5763854c8c84c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationObj: {fileID: 709766086}
 --- !u!1 &638400465
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,6 +875,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc6a6571f604f7540956c150412570ff, type: 3}
+--- !u!1 &709766086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8430808151012026479, guid: fa8bae3a403cdeb4cb1c64833f18af98,
+    type: 3}
+  m_PrefabInstance: {fileID: 1897558787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &755119989
 GameObject:
   m_ObjectHideFlags: 0

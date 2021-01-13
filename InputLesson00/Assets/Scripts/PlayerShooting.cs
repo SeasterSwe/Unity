@@ -39,7 +39,7 @@ public class PlayerShooting : MonoBehaviour
             timeToNextBullet = Time.time + fireRate;
             FireKnockBack();
         }
-        if (scoreManger.score >= scoreToUnlockBullet)
+        if (ScoreManager.score >= scoreToUnlockBullet)
         {
             amountOfBullets += 1;
             scoreToUnlockBullet *= 2;
@@ -67,13 +67,14 @@ public class PlayerShooting : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag != "Asteroid" && collision.gameObject.tag != "Enemy")
-            return;
-
-        return;
+            return;       
 
         amountOfBullets -= 1;
         if (amountOfBullets <= 0)
-            print("died");
+        {
+            //ScoreList.CheckIfHighScore(scoreManger.score);
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameSceneManager>().LoadSceneWithTransition("End");
+        }
     }
     void PunchScale()
     {

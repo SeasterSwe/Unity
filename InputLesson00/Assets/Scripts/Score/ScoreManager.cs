@@ -5,7 +5,7 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     [HideInInspector]
-    public float score;
+    public static float score;
     float time;
     float smoothScore;
     float smoothVelocity;
