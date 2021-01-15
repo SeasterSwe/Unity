@@ -10,6 +10,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void LoadSceneWithTransition(string scene)
     {
+        Time.timeScale = 1f;
         StartCoroutine(SwapWithAnimation(scene, 1f));
     }
     IEnumerator SwapWithAnimation(string scene, float transitionSpeed)

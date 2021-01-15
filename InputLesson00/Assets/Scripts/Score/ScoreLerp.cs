@@ -14,10 +14,12 @@ public class ScoreLerp : MonoBehaviour
     public float endScale = 1.5f;
     public float startScale = 0.5f;
     public float effectSpeed;
+    Canvas canvas;
     void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
         rectTransform = GetComponent<RectTransform>();
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
 
         StartCoroutine(LerpScore(targetScore, effectSpeed));
         
@@ -36,5 +38,10 @@ public class ScoreLerp : MonoBehaviour
             text.text = Mathf.RoundToInt(displayScore).ToString();
             yield return null;
         }
+
+        float xValOutOfScreen = canvas.GetComponent<RectTransform>().position.x;
+        xValOutOfScreen = xValOutOfScreen + 1300;//width på text
+        Vector3 spawnPos = new Vector3(xValOutOfScreen, rectTransform.position.y, rectTransform.transform.position.z);
+        rectTransform.DOMove(spawnPos, 0.5f);
     }
 }
