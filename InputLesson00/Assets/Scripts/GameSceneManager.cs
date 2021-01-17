@@ -23,7 +23,16 @@ public class GameSceneManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(scene);
+            if (GameObject.Find("TransitionPrefab") != null)
+            {
+                GameObject.Find("TransitionPrefab").GetComponent<Animator>().SetTrigger("Start");
+                yield return new WaitForSeconds(transitionSpeed);
+                SceneManager.LoadScene(scene);
+            }
+            else
+            {
+                SceneManager.LoadScene(scene);
+            }
         }
     }
 }

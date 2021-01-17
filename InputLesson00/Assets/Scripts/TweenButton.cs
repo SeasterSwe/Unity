@@ -30,6 +30,7 @@ public class TweenButton : MonoBehaviour
         {
             if (hasScaled == false)
             {
+
                 Selected();
                 hasScaled = true;
             }
@@ -43,8 +44,8 @@ public class TweenButton : MonoBehaviour
         if (Time.timeSinceLevelLoad > 0.2f)
         {
             PlaySound(selected, 0.3f);
-            rectTransform.DOScale(startScale + (Vector3.one * 0.7f), 0.2f).SetUpdate(true);
         }
+        rectTransform.DOScale(startScale + (Vector3.one * 0.7f), 0.2f).SetUpdate(true);
     }
     void ReScale()
     {

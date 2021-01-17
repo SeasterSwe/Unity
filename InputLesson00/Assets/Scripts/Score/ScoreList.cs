@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ScoreList : MonoBehaviour
 {
@@ -14,10 +16,13 @@ public class ScoreList : MonoBehaviour
     public Color[] textColors;
     public GameObject canvas;
     public float tweenDelay = 1f;
+    public GameObject menuButton;
+    public GameObject replayButton;
+    public Color dotColor;
 
     void Start()
     {
-        if(canvas == null)
+        if (canvas == null)
             canvas = GameObject.Find("Canvas");
 
         if (!PlayerPrefs.HasKey("Score0"))
@@ -74,6 +79,7 @@ public class ScoreList : MonoBehaviour
 
             yield return new WaitForSeconds(0.4f);
         }
+        SetAndSavePrefs();
         StartCoroutine(TweenTheScoreTexts());
     }
 
@@ -81,11 +87,23 @@ public class ScoreList : MonoBehaviour
     {
         for (int i = 0; i < amountOfSavedScores; i++)
         {
-            var scoreObj = parentObj.transform.GetChild(i).transform;
+            int n = (amountOfSavedScores - i - 1);
+            var scoreObj = parentObj.transform.GetChild(n).transform;
             scoreObj.DOScale(scoreObj.localScale + (Vector3.one * 0.2f), 0.2f);
             yield return new WaitForSeconds(0.2f);
+
+            if (SceneManager.GetActiveScene().name == "End" && topScores[i] == ScoreManager.score)
+            {
+                NewHighScore(n);
+                break;
+            }
             scoreObj.DOScale((Vector3.one), 0.2f);
         }
+
+        if (menuButton != null)
+            InstasiateButton();
+
+        ScoreManager.score = 0;
     }
 
     public void CheckIfHighScore(float scoreCheck)
@@ -95,7 +113,35 @@ public class ScoreList : MonoBehaviour
             topScores.Remove(topScores[0]);
             topScores.Add(scoreCheck);
             topScores.Sort();
-            SetAndSavePrefs();
         }
+    }
+
+    public void NewHighScore(int n)
+    {
+        Vector3 spawnPos = parentObj.transform.position;
+        spawnPos -= Vector3.up * (n + 1) * 100;
+        spawnPos += Vector3.right * 600;
+        TextMeshProUGUI dot = Instantiate(scoreText, spawnPos, parentObj.transform.rotation);
+        dot.text = "- new score";
+        Color c = textColors[n];
+        c.a = 0.8f;
+        dot.color = c;
+        dot.rectTransform.SetParent(parentObj.transform);
+
+    }
+
+    public void InstasiateButton()
+    {
+        Vector3 spawnPos = parentObj.transform.position;
+        spawnPos -= Vector3.up * (amountOfSavedScores + 2) * 100;
+        GameObject menuButtonClone = Instantiate(menuButton, spawnPos, parentObj.transform.rotation);
+        menuButtonClone.transform.SetParent(parentObj.transform);
+
+        spawnPos = parentObj.transform.position;
+        spawnPos -= Vector3.up * (amountOfSavedScores + 1) * 100;
+        GameObject replayButtonClone = Instantiate(replayButton, spawnPos, parentObj.transform.rotation);
+        replayButtonClone.transform.SetParent(parentObj.transform);
+
+        GameObject.Find("EventSystem").GetComponent<EventSystem>().SetSelectedGameObject(replayButtonClone);
     }
 }

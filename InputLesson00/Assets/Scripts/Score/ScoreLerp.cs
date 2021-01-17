@@ -15,13 +15,16 @@ public class ScoreLerp : MonoBehaviour
     public float startScale = 0.5f;
     public float effectSpeed;
     Canvas canvas;
+    public GameObject highScoreList;
+    public GameObject scoreParent;
+    public GameObject cornerPos;
     void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
         rectTransform = GetComponent<RectTransform>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
 
-        StartCoroutine(LerpScore(targetScore, effectSpeed));
+        StartCoroutine(LerpScore(ScoreManager.score, effectSpeed));
         
     }
     IEnumerator LerpScore(float targetScore, float speed)
@@ -39,9 +42,13 @@ public class ScoreLerp : MonoBehaviour
             yield return null;
         }
 
-        float xValOutOfScreen = canvas.GetComponent<RectTransform>().position.x;
-        xValOutOfScreen = xValOutOfScreen + 1300;//width på text
-        Vector3 spawnPos = new Vector3(xValOutOfScreen, rectTransform.position.y, rectTransform.transform.position.z);
-        rectTransform.DOMove(spawnPos, 0.5f);
+        //?!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?!??!?!?!?!?!?!?!?!?!?!?!?!?!?!??!!?!??!!?!?!?!?!?!?!?!?!?
+        rectTransform.DOMove(cornerPos.transform.position, 0.5f).OnComplete(ActivateScoreList);
+        rectTransform.DOScale(Vector3.one * 2.8f, 0.5f);
+    }
+    void ActivateScoreList()
+    {
+        scoreParent.SetActive(true);
+        highScoreList.SetActive(true);
     }
 }
