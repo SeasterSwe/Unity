@@ -9,15 +9,14 @@ public class Bullet : MonoBehaviour
     OutOfBound outOfBound;
     TrailRenderer trailRenderer;
     Particle particle;
-    public GameObject hitEffekt;
+    public string hitEffekt = "Yeah";
     private void Awake()
     {
         outOfBound = gameObject.AddComponent<OutOfBound>();
         rb = GetComponent<Rigidbody2D>();
         trailRenderer = GetComponent<TrailRenderer>();
-        hitEffekt = Instantiate(hitEffekt);
         particle = gameObject.AddComponent<Particle>();
-        particle.particle = hitEffekt;
+        particle.ParticleName = hitEffekt;
     }
 
     private void OnEnable()

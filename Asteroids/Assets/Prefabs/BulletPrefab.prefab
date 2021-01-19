@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 14
-  hitEffekt: {fileID: 554402643242428883, guid: 7fca8f7273cc9d34ca303cd78f211e1b, type: 3}
+  hitEffekt: Yeah
 --- !u!50 &5060151452433758840
 Rigidbody2D:
   serializedVersion: 4

@@ -13,11 +13,12 @@ public class Asteroid : MonoBehaviour
     float astRadX = 2;
     float astRadY = 2;
 
-    public int splitTimes = 5;
+    public int hitsToDeath = 10;
     float warpDelay;
 
     OutOfBound outOfBound;
     Health health;
+    Particle particle;
     public void SetRandomSize(float min, float max)
     {
         astRadX = Random.Range(min, max);
@@ -27,14 +28,17 @@ public class Asteroid : MonoBehaviour
     {
         astRadX = x;
         astRadY = y;
-        splitTimes = split;
+        hitsToDeath = split;
     }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         outOfBound = gameObject.AddComponent<OutOfBound>();
         health = gameObject.AddComponent<Health>();
+        health.startHealth = hitsToDeath;
         SetRandomSize(2, 4f);
+        particle = GetComponent<Particle>();
+        particle.ParticleName = "Explotion Variant";
     }
 
     void Start()
@@ -100,17 +104,27 @@ public class Asteroid : MonoBehaviour
     }
     void Split()
     {
+        hitsToDeath -= 1;
         if (astRadX + astRadY > 1f)
         {
             astRadX *= 0.5f;
             astRadY *= 0.5f;
             transform.localScale = new Vector3(astRadX, astRadY, 1);
             GameObject asteriod = Instantiate(gameObject);
-            asteriod.GetComponent<Asteroid>().SetVals(astRadX, astRadY, splitTimes);
+            asteriod.GetComponent<Asteroid>().SetVals(astRadX, astRadY, hitsToDeath);
             asteriod.GetComponent<Asteroid>().SetStartVelocity(GetStartTarget());
+            particle.PlayParticle(MiddleOf(gameObject, asteriod));
             return;
         }
+        particle.PlayParticle(transform.position);
         Destroy(gameObject);
+    }
+    Vector3 MiddleOf(GameObject one, GameObject two)
+    {
+        //josh.position.x + (mark.position.x - josh.position.x) / 2;
+        float x = one.transform.position.x + (one.transform.position.x - two.transform.position.x) * 0.5f;
+        float y =  one.transform.position.y + (one.transform.position.y - two.transform.position.y) *  0.5f;
+        return new Vector3(x, y, one.transform.position.z);
     }
 
 }

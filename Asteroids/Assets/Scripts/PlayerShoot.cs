@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public GameObject particleObj;
+    public string particleObj = "MuzzleStuff";
     public Transform shootPos;
     private Particle particle;
     private float nextFire;
@@ -12,8 +12,9 @@ public class PlayerShoot : MonoBehaviour
     private void Awake()
     {
         particle = gameObject.AddComponent<Particle>();
-        particle.particle = particleObj;
-        particleObj.transform.SetParent(shootPos);
+        particle.ParticleName = particleObj;
+        particle.PlayParticle(Vector3.one * 15f);
+        particle.particle.transform.SetParent(shootPos);
     }
     private void Update()
     {
