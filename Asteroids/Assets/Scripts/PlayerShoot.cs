@@ -20,6 +20,7 @@ public class PlayerShoot : MonoBehaviour
     {
         if(Input.GetMouseButton(0) && Time.time > nextFire)
         {
+            SoundManager.PlaySound(SoundManager.Sound.Shoot, shootPos.position, Random.Range(0.6f, 1.5f), 0.05f);
             nextFire = Time.time + fireRate;
             particle.PlayParticle(shootPos.position);
             ShootBullet();

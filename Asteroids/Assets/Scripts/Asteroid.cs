@@ -13,7 +13,7 @@ public class Asteroid : MonoBehaviour
     float astRadX = 2;
     float astRadY = 2;
 
-    public int hitsToDeath = 10;
+    public int hitsToDeath = 5;
     float warpDelay;
 
     OutOfBound outOfBound;
@@ -36,14 +36,14 @@ public class Asteroid : MonoBehaviour
         outOfBound = gameObject.AddComponent<OutOfBound>();
         health = gameObject.AddComponent<Health>();
         health.startHealth = hitsToDeath;
-        SetRandomSize(2, 4f);
+        SetRandomSize(3f, 4f);
         particle = GetComponent<Particle>();
         particle.ParticleName = "Explotion Variant";
     }
 
     void Start()
     {
-        if(startTarget != Vector2.zero)
+        if (startTarget != Vector2.zero)
             SetStartVelocity(startTarget);
 
         transform.localScale = new Vector3(astRadX, astRadY, 1);
@@ -97,7 +97,10 @@ public class Asteroid : MonoBehaviour
         if (tag == "Bullet")
         {
             if (health.TakeDmgAndCheckIfAlive())
+            {
+                SoundManager.PlaySound(SoundManager.Sound.HitSound, transform.position, Random.Range(0.7f, 1.4f), 0.5f);
                 return;
+            }
 
             Split();
         }
@@ -105,6 +108,8 @@ public class Asteroid : MonoBehaviour
     void Split()
     {
         hitsToDeath -= 1;
+        SoundManager.PlaySound(SoundManager.Sound.Explotion, transform.position, Random.Range(0.7f, 1.4f), 0.5f);
+        ScoreManager.AddScore(20);
         if (astRadX + astRadY > 1f)
         {
             astRadX *= 0.5f;
@@ -123,7 +128,7 @@ public class Asteroid : MonoBehaviour
     {
         //josh.position.x + (mark.position.x - josh.position.x) / 2;
         float x = one.transform.position.x + (one.transform.position.x - two.transform.position.x) * 0.5f;
-        float y =  one.transform.position.y + (one.transform.position.y - two.transform.position.y) *  0.5f;
+        float y = one.transform.position.y + (one.transform.position.y - two.transform.position.y) * 0.5f;
         return new Vector3(x, y, one.transform.position.z);
     }
 
