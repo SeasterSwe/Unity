@@ -24,10 +24,26 @@ public class PlayerShooting : MonoBehaviour
     float scoreToUnlockBullet = 200;
     public Vector3 punchScale;
     public float punchSpeed = 0.15f;
+
+    public AudioClip takeDmg;
+    public AudioClip death;
+    public AudioClip upgrade;
+    private AudioSource audioSource;
+    private List<SpriteRenderer> sprites = new List<SpriteRenderer>();
+    Color originalColors;
+    public Color powerColor;
+    public Color deathColor;
     private void Start()
     {
+        ScoreManager.score = 0;
         rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-        scoreManger = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        audioSource = GetComponent<AudioSource>();
+
+        foreach (SpriteRenderer child in GetComponentsInChildren<SpriteRenderer>())
+            sprites.Add(child);
+
+        sprites.Add(GetComponent<SpriteRenderer>());
+        originalColors = sprites[0].color;
     }
     void Update()
     {
@@ -41,6 +57,8 @@ public class PlayerShooting : MonoBehaviour
         }
         if (ScoreManager.score >= scoreToUnlockBullet)
         {
+            PlaySound(upgrade);
+            StartCoroutine(FadeSprite(0.3f, 6, powerColor));
             amountOfBullets += 1;
             scoreToUnlockBullet *= 2;
         }
@@ -67,17 +85,79 @@ public class PlayerShooting : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag != "Asteroid" && collision.gameObject.tag != "Enemy")
-            return;       
+            return;
 
         amountOfBullets -= 1;
         if (amountOfBullets <= 0)
         {
-            //ScoreList.CheckIfHighScore(scoreManger.score);
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameSceneManager>().LoadSceneWithTransition("End");
+            StartCoroutine(FadeSprite(0.3f, 10, deathColor));
+            PlaySound(death);
+            StartCoroutine(Death());
+        }
+        else
+        {
+            PlaySound(takeDmg);
+            StartCoroutine(FadeSprite(0.3f, 4, deathColor));
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<BaseEnemy>().DestroyEnemy();
         }
     }
     void PunchScale()
     {
         transform.Find("Cannon").DOPunchScale(punchScale, punchSpeed);
+    }
+
+    IEnumerator Death()
+    {
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyManager>().enabled = false;
+        StartCoroutine(Spin());
+        yield return new WaitForEndOfFrame();
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject e in enemies)
+        {
+            e.GetComponent<BaseEnemy>().DestroyEnemy();
+            yield return new WaitForSeconds(0.2f);
+        }
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameSceneManager>().LoadSceneWithTransition("End");
+        yield return new WaitForSeconds(0.8f);
+        spin = false;
+    }
+    private bool spin;
+    IEnumerator Spin()
+    {
+        Vector3 dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        GetComponent<PlayerMove>().enabled = false;
+        rb.AddForce(dir.normalized * 4, ForceMode2D.Impulse);
+        float z = transform.rotation.z;
+        z += 360;
+        spin = true;
+        while (spin)
+        {
+            z += 10;
+            transform.Rotate(Vector3.forward * z * Time.deltaTime);
+            yield return null;
+        }
+    }
+    IEnumerator FadeSprite(float delay, int amount, Color color)
+    {
+        float t = (delay / 2f);
+        for (int i = 0; i < amount; i++)
+        {
+            foreach (SpriteRenderer sprite in sprites)
+                sprite.color = color;
+
+            yield return new WaitForSeconds(t);
+            foreach (SpriteRenderer sprite in sprites)
+                sprite.color = originalColors;
+
+            yield return new WaitForSeconds(t);
+        }
+    }
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 }

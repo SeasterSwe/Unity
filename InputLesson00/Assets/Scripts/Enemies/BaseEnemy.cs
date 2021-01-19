@@ -81,7 +81,7 @@ public class BaseEnemy : MonoBehaviour
         StartCoroutine(Blink(Color.white, 0.15f));
     }
 
-    void DestroyEnemy()
+    public void DestroyEnemy()
     {
         Instantiate(explotion, transform.position, explotion.transform.rotation);
         Destroy(gameObject);

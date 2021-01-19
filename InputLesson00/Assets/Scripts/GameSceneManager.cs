@@ -35,4 +35,31 @@ public class GameSceneManager : MonoBehaviour
             }
         }
     }
+    public void QuitGameWithAnimation()
+    {
+        StartCoroutine(QuitGame(1f));
+    }
+
+    IEnumerator QuitGame(float transitionSpeed)
+    {
+        if (animationObj != null)
+        {
+            animationObj.GetComponent<Animator>().SetTrigger("Start");
+            yield return new WaitForSeconds(transitionSpeed);
+            Application.Quit();
+        }
+        else
+        {
+            if (GameObject.Find("TransitionPrefab") != null)
+            {
+                GameObject.Find("TransitionPrefab").GetComponent<Animator>().SetTrigger("Start");
+                yield return new WaitForSeconds(transitionSpeed);
+                Application.Quit();
+            }
+            else
+            {
+                Application.Quit();
+            }
+        }
+    }
 }
