@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 534525745654784299}
   - component: {fileID: 534525745654784297}
   - component: {fileID: -944984473033825922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Asteriod
   m_TagString: Enemy
   m_Icon: {fileID: 0}
