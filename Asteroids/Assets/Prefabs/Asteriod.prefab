@@ -47,8 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d216db533208e4c8d475845684f86d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkColor: {r: 0.32941177, g: 0.32941177, b: 0.32941177, a: 0.8666667}
   startTarget: {x: 0, y: 0}
   hitsToDeath: 6
+  startColor: {r: 0.32941177, g: 0.32941177, b: 0.32941177, a: 1}
 --- !u!212 &534525745654784296
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    public Color blinkColor;
     Rigidbody2D rb;
     Vector2 velocity;
     public Vector2 startTarget;
@@ -19,6 +20,7 @@ public class Asteroid : MonoBehaviour
     OutOfBound outOfBound;
     Health health;
     Particle particle;
+    public Color startColor;
     public void SetRandomSize(float min, float max)
     {
         astRadX = Random.Range(min, max);
@@ -36,6 +38,8 @@ public class Asteroid : MonoBehaviour
         outOfBound = gameObject.AddComponent<OutOfBound>();
         health = gameObject.AddComponent<Health>();
         health.startHealth = hitsToDeath;
+        health.blinkColor = blinkColor;
+        GetComponent<SpriteRenderer>().color = startColor;
         SetRandomSize(3f, 4f);
         particle = GetComponent<Particle>();
         particle.ParticleName = "Explotion Variant";
@@ -104,6 +108,8 @@ public class Asteroid : MonoBehaviour
 
             Split();
         }
+        else if (tag == "Player")
+            Explotion();
     }
     void Split()
     {
@@ -121,6 +127,11 @@ public class Asteroid : MonoBehaviour
             particle.PlayParticle(MiddleOf(gameObject, asteriod));
             return;
         }
+        Explotion ();
+    }
+
+    public void Explotion()
+    {
         particle.PlayParticle(transform.position);
         Destroy(gameObject);
     }

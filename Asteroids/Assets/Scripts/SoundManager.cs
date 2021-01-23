@@ -9,7 +9,9 @@ public static class SoundManager
     {
         HitSound,
         Shoot,
-        Explotion
+        Explotion,
+        HurtSound,
+        GameOverSound
     }
 
     private static GameObject oneShotGameObject;
