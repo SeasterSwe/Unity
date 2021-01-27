@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7183de01b8556314aa7b172caafd126f, type: 3}
-  m_Name: AutoMiner
+  m_Name: AutoMiner3
   m_EditorClassIdentifier: 
-  autoName: Noob
+  autoName: arfafga
   autoImage: {fileID: 0}
-  startCost: 100
-  costMutli: 1.4
-  cookiesPerSec: 1
+  startCost: 2
+  costMutli: 6
+  cookiesPerSec: 100
