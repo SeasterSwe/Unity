@@ -48,4 +48,26 @@ public class Save : MonoBehaviour
             return info;
         }
     }
+    public CoockieData LoadCoockies(string fileName)
+    {
+        string load = path + fileName;
+        using (var stream = File.OpenText(load))
+        {
+            CoockieData info = new CoockieData();
+            info = JsonUtility.FromJson<CoockieData>(stream.ReadToEnd());
+            return info;
+        }
+    }
+
+    public void SaveInfos(CoockieData autoInfo, string fileName)
+    {
+        var info = new CoockieData();
+        var comp = autoInfo;
+
+        info.coockieAmount = comp.coockieAmount;
+        info.coockiesPerSec = comp.coockiesPerSec;
+
+        string jsonString = JsonUtility.ToJson(info);
+        SaveToFile(path + fileName, jsonString);
+    }
 }
