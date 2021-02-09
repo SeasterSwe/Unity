@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7183de01b8556314aa7b172caafd126f, type: 3}
   m_Name: AutoMiner0
   m_EditorClassIdentifier: 
-  autoName: Noob
+  autoName: step1
   autoImage: {fileID: 0}
   startCost: 10
-  costMutli: 1.4
+  costMutli: 1.1
   cookiesPerSec: 0.1

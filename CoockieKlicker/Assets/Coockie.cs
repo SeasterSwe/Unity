@@ -10,9 +10,13 @@ public class Coockie : MonoBehaviour
     public Save save;
     private CoockieData coockieData;
     public float coockiesPerClick = 2;
-    private void Start()
+    private void Awake()
     {
         coockieData = new CoockieData();
+        save.LoadCoockies(name);
+    }
+    private void Start()
+    {
     }
     public void Clicked()
     {
@@ -35,16 +39,17 @@ public class Coockie : MonoBehaviour
             coockieData.coockiesPerSec = ScoreManager.CPS;
             save.SaveInfos(coockieData, name);
         }
+
         if (Input.GetKeyDown(KeyCode.L))
         {
-            LoadCoockies();
+            save.LoadCoockies(name);
         }
 
     }
 
-    public void LoadCoockies()
+    public void LoadCoockies(CoockieData data)
     {
-        coockieData = save.LoadCoockies(name);
+        coockieData = data;
         ScoreManager.CPS = coockieData.coockiesPerSec;
         ScoreManager.coockies = coockieData.coockieAmount;
     }

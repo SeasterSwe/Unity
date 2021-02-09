@@ -30,10 +30,10 @@ public class AutoMiner : MonoBehaviour
             autoInfo.amount = 0;
             autoInfo.cost = auto.startCost;
         }
+        save.Load(name);
     }
     private void Start()
     {
-        autoInfo = save.Load(name);
         GetTexts();
         SetTexts();
         //autoInfo = save.Load(name);
@@ -95,9 +95,13 @@ public class AutoMiner : MonoBehaviour
             save.SaveInfos(autoInfo, name);
         if (Input.GetKeyDown(KeyCode.L))
         {
-            autoInfo = save.Load(name);
+            save.Load(name);
             SetTexts();
         }
     }
-
+    public void LoadData(AutoInfo info)
+    {
+        autoInfo = info;
+        SetTexts();
+    }
 }

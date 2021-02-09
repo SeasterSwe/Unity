@@ -15,5 +15,5 @@ MonoBehaviour:
   autoName: Sala
   autoImage: {fileID: 0}
   startCost: 100
-  costMutli: 1.7
+  costMutli: 1.2
   cookiesPerSec: 1

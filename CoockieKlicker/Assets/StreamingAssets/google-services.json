@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "564212836531",
+    "firebase_url": "https://coockieclicker-4bad8-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "coockieclicker-4bad8",
+    "storage_bucket": "coockieclicker-4bad8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564212836531:android:64d1db2d32c7d6c291e8c6",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.CoockieKlicker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564212836531-vi75aggtrpooh3s6ejund9ukfndvkl5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6hEiSgWRP15UsqODs8emtH0S0ERgphps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564212836531-vi75aggtrpooh3s6ejund9ukfndvkl5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
