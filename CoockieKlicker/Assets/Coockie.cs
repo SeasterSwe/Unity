@@ -6,7 +6,6 @@ using System;
 
 public class Coockie : MonoBehaviour
 {
-
     public Save save;
     private CoockieData coockieData;
     public float coockiesPerClick = 2;

@@ -11,10 +11,10 @@ public class CPSDisplayer : MonoBehaviour
     void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
+        ScoreManager.bought += UpdateCPSText;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateCPSText()
     {
         string text = ($"CPS : {ScoreManager.CPS}");
         this.text.text = text;

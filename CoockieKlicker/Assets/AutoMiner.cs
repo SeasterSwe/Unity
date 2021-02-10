@@ -35,7 +35,7 @@ public class AutoMiner : MonoBehaviour
     private void Start()
     {
         GetTexts();
-        SetTexts();
+        ScoreManager.bought += SetTexts;
         //autoInfo = save.Load(name);
     }
 
@@ -59,8 +59,6 @@ public class AutoMiner : MonoBehaviour
         if (canBuy())
         {
             Buy();
-            SetTexts();
-            coockieDisplayer.UpdateText();
         }
         else
         {

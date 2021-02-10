@@ -22,9 +22,4 @@ public class CoockieDisplayer : MonoBehaviour
             scoreText.text = displayInt.ToString();
         }
     }
-
-    public void UpdateText()
-    {
-        scoreText.text = Mathf.Round(ScoreManager.coockies).ToString();
-    }
 }
