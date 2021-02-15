@@ -27,5 +27,16 @@ public class GameManager : MonoBehaviour
         if (topSquare == null)
             topSquare = GameObject.Find("Square (1)").gameObject;
     }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Reload();
+        }
+    }
+    void Reload()
+    {
+
+    }
 
 }
