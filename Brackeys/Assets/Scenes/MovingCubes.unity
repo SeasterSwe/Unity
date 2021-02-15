@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 599603944}
   - component: {fileID: 599603943}
   m_Layer: 0
-  m_Name: Square (4)
+  m_Name: AirStop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
