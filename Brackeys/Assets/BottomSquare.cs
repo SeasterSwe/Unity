@@ -31,6 +31,7 @@ public class BottomSquare : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         transform.position = target;
+        GameManager.Instance.topSquare.GetComponent<TopSquare>().SetPosition(transform.Find("Target").position);
         canMove = true;
     }
 
