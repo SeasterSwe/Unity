@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public TextMeshProUGUI moveCounter;
+    private int counter;
+
     public GameObject bottomSquare;
     public GameObject topSquare;
 
@@ -23,20 +28,32 @@ public class GameManager : MonoBehaviour
         }
 
         if (bottomSquare == null)
-            bottomSquare = GameObject.Find("Square").gameObject;
+            bottomSquare = GameObject.Find("Bottom").gameObject;
         if (topSquare == null)
-            topSquare = GameObject.Find("Square (1)").gameObject;
+            topSquare = GameObject.Find("Top").gameObject;
     }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
             Reload();
+            Reload();
         }
     }
-    void Reload()
+    public void Reload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadNextLevel()
     {
 
+    }
+
+    public void MadeAMove()
+    {
+        counter += 1;
+        moveCounter.text = ($"Move Counter : {counter}");
     }
 
 }

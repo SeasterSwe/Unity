@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BottomSquare : MonoBehaviour
+public class BottomSquare : MonoBehaviour, IExplodeable
 {
     private Rigidbody2D rb;
     Vector3 target;
     public bool canMove;
+    public float launchSpeed;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -20,26 +21,30 @@ public class BottomSquare : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && canMove)
-            StartCoroutine(Launch(targetPos()));
-        else if (canMove)
-        {
+        if (Input.GetMouseButton(0) && canMove)
             DrawLine(targetPos());
+
+        if(Input.GetMouseButtonUp(0) && canMove)
+        {
+            GetComponent<LineRenderer>().positionCount = 0;
+            StartCoroutine(Launch(targetPos()));
         }
     }
 
     void DrawLine(Vector3 endPos)
     {
+        GetComponent<LineRenderer>().positionCount = 2;
         GetComponent<LineRenderer>().SetPosition(0, transform.position);
         GetComponent<LineRenderer>().SetPosition(1, endPos);
     }
 
     IEnumerator Launch(Vector3 target)
     {
+        GameManager.Instance.MadeAMove();
         canMove = false;
         Vector3 startPos = transform.position;
         var launchDir = target - startPos;
-        rb.velocity = launchDir.normalized * 5f;
+        rb.velocity = launchDir.normalized * launchSpeed;
         //float t = 0;
         //while (t <= 1)
         //{
@@ -79,5 +84,12 @@ public class BottomSquare : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         GameManager.Instance.topSquare.GetComponent<TopSquare>().SetPosition(transform.Find("Target").position);
+    }
+    public GameObject explotion;
+    public void Explode()
+    {
+        GameObject explotionClone = Instantiate(explotion, transform.position, explotion.transform.rotation);
+        Destroy(explotionClone, 2f);
+        Destroy(gameObject);
     }
 }

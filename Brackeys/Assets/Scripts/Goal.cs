@@ -12,6 +12,7 @@ public class Goal : LandBase
         enterd++;
         if (targetAmount <= enterd)
         {
+            GetComponent<CubeSpawner>().SpawnCubes(transform, 3f);
             Debug.Log("Win");
         }
     }

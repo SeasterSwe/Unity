@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TopSquare : MonoBehaviour
+public class TopSquare : MonoBehaviour, IExplodeable
 {
-    Vector3 landPosition;
     Transform baseTarget;
-    bool imMoving;
+    public float rotationSpeed = -90;
+
     void Start()
     {
         baseTarget = GameManager.Instance.bottomSquare.transform.Find("Target");
@@ -18,11 +18,14 @@ public class TopSquare : MonoBehaviour
     {
         //https://pastebin.com/nrc5FBPc   
     }
+
     public void SetPosition(Vector3 endPos)
     {
         //transform.position = position;
-        StartCoroutine(MoveinArc(endPos));
+        spinning = MoveinArc(endPos);
+        StartCoroutine(spinning);
     }
+    public IEnumerator spinning;
     IEnumerator MoveinArc(Vector3 endPosr)
     {
         Vector3 startPos = transform.position;
@@ -40,10 +43,10 @@ public class TopSquare : MonoBehaviour
         transform.SetParent(centerObj.transform);
 
         bool spin = true;
-        float rotationSpeed = -90;
+        float rotationSpeed = this.rotationSpeed;
         float t = 0;
 
-        if(startPos.x > endPos.x)
+        if (startPos.x > endPos.x)
         {
             rotationSpeed *= -1;
         }
@@ -60,5 +63,14 @@ public class TopSquare : MonoBehaviour
         transform.position = baseTarget.position;
         GameManager.Instance.bottomSquare.GetComponent<BottomSquare>().canMove = true;
         yield return null;
+    }
+
+    public GameObject explotion;
+    public void Explode()
+    {
+        StopCoroutine(spinning);
+        GameObject explotionClone = Instantiate(explotion, transform.position, explotion.transform.rotation);
+        Destroy(explotionClone, 2f);
+        Destroy(gameObject);
     }
 }
